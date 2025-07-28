@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Pentru Damaris</title>
+    <style>
+        /* VIDEO FUNDAL CU TĂIETURĂ SUS/JOS */
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: -1;
+            opacity: 0.50;
+
+            /* Taie 25% sus și jos = păstrează doar mijlocul */
+            clip-path: inset(25% 0 25% 0);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #cc0066;
+            font-size: 48px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .box {
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .box img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 0 15px #ccc;
+        }
+
+        .box p {
+            margin-top: 15px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #ff3399;
+        }
+
+        .box button {
+            margin-top: 15px;
+            padding: 14px 28px;
+            font-size: 24px;
+            background-color: #ff6699;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .box button:hover {
+            background-color: #cc3366;
+        }
+
+        #mesaj {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 36px;
+            font-weight: bold;
+            color: #cc0052;
+            display: none;
+            animation: grow 2s ease-in-out;
+        }
+
+        @keyframes grow {
+            0% {transform: scale(0); opacity: 0;}
+            100% {transform: scale(1); opacity: 1;}
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: red;
+            transform: rotate(45deg);
+            animation: float 10s infinite ease-in;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -15px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: -15px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(45deg);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- VIDEO PE FUNDAL CU TĂIERE SUS/JOS -->
+    <video id="video-background" autoplay loop muted playsinline>
+        <source src="video2.mp4" type="video/mp4">
+        Browserul tău nu suportă video HTML5.
+    </video>
+
+    <!-- AUDIO (se pornește la click pe buton) -->
+    <audio id="melodie">
+        <source src="muzica1.mp3" type="audio/mpeg">
+        Browserul tău nu suportă audio.
+    </audio>
+
+    <!-- TEXT -->
+    <h1>Complimente pentru tine, Dmaris 💖</h1>
+
+    <div class="container">
+        <div class="box">
+            <img src="dami.jpeg" alt="Dragă">
+            <p>Dragă</p>
+        </div>
+        <div class="box">
+            <img src="dami1.jpeg" alt="Scumpă">
+            <p>Scumpă</p>
+            <button onclick="afiseazaMesaj()">Apasă ca să vezi !</button>
+        </div>
+        <div class="box">
+            <img src="dami2.jpeg" alt="Adorabilă">
+            <p>Adorabilă</p>
+        </div>
+    </div>
+
+    <div id="mesaj">Damaris, tăticul te iubește foarte mult. Mulțumesc pentru cina de in seara această. 🤗</div>
+
+    <div class="hearts"></div>
+
+    <script>
+        function afiseazaMesaj() {
+            document.getElementById("mesaj").style.display = "block";
+            const audio = document.getElementById("melodie");
+            audio.volume = 0.2;
+            audio.play();
+        }
+
+        const heartsContainer = document.querySelector('.hearts');
+        for (let i = 0; i < 20; i++) {
+            let heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+            heart.style.opacity = Math.random();
+            heartsContainer.appendChild(heart);
+        }
+    </script>
+
+</body>
+</html>
